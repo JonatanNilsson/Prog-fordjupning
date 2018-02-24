@@ -5,9 +5,9 @@ public interface Map<K, V> {
         V getValue();
         V setValue(V value);
     }
-    V get(Object arg0);
+    V get(Object key);
     boolean isEmpty();
     V put(K key, V value);
-    V remove(Object arg0);
+    V remove(Object key);
     int size();
 }

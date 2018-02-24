@@ -125,7 +125,21 @@ public class SimpleHashMap<K,V>  implements Map<K,V> {
     }
 
     @Override
-    public V remove(Object arg0) {
+    public V remove(Object key) {
+        int index = index((K)key);
+
+        Entry<K,V> cur = m_table[index];
+
+        while (cur != null){
+            if (m_table[index].m_key.equals(key)){
+                V value = m_table[index].m_value;
+                m_table[index] = m_table[index].m_next;
+                m_size--;
+                return value;
+            }
+            cur = cur.m_next;
+        }
+
         return null;
     }
 
