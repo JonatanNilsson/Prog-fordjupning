@@ -8,6 +8,7 @@ public class SimpleHashMap<K,V>  implements Map<K,V> {
     public static class Entry<K,V> implements Map.Entry<K, V> {
         private K m_key;
         private V m_value;
+        private Entry next;
 
         Entry (K key, V value){
             m_key = key;
@@ -40,15 +41,29 @@ public class SimpleHashMap<K,V>  implements Map<K,V> {
 
     /** Constructs an empty hashmap with the default initial capacity (16)
      and the default load factor (0.75). */
-    SimpleHashMap(){
+    public SimpleHashMap(){
 
     }
     /** Constructs an empty hashmap with the specified initial capacity
      and the default load factor (0.75). */
-    SimpleHashMap(int capacity){
+    public SimpleHashMap(int capacity){
         Table = (Entry<K,V>[]) new Entry[capacity];
     }
 
+    String show(){
+        StringBuilder result = new StringBuilder();
+
+        for (Entry<K, V> aTable : Table) {
+            Entry entry = aTable;
+            while (entry != null) {
+                result.append(entry);
+                entry = entry.next;
+            }
+            result.append('\n');
+        }
+
+        return result.toString();
+    }
 
     @Override
     public V get(Object arg0) {
