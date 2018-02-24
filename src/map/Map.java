@@ -7,7 +7,7 @@ public interface Map<K, V> {
     }
     V get(Object arg0);
     boolean isEmpty();
-    V put(K arg0, V arg1);
+    V put(K key, V value);
     V remove(Object arg0);
     int size();
 }
