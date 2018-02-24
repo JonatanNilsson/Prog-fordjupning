@@ -89,4 +89,15 @@ public class SimpleHashMap<K,V>  implements Map<K,V> {
     public int size() {
         return size;
     }
+
+
+    private int index(K key){
+        return key.hashCode() % Table.length;
+    }
+
+    private Entry find(int index, K key){
+        Entry entry = Table[index];
+        while (entry != null && !entry.m_key.equals(key)) entry = entry.next;
+        return entry;
+    }
 }
