@@ -3,7 +3,7 @@ package map;
 public class SimpleHashMap<K,V>  implements Map<K,V> {
 
     Entry<K, V>[] Table;
-
+    private int size = 0;
 
     public static class Entry<K,V> implements Map.Entry<K, V> {
         private K m_key;
@@ -72,7 +72,7 @@ public class SimpleHashMap<K,V>  implements Map<K,V> {
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return size == 0;
     }
 
     @Override
@@ -87,6 +87,6 @@ public class SimpleHashMap<K,V>  implements Map<K,V> {
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 }
