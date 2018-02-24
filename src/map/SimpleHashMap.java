@@ -42,7 +42,7 @@ public class SimpleHashMap<K,V>  implements Map<K,V> {
     /** Constructs an empty hashmap with the default initial capacity (16)
      and the default load factor (0.75). */
     public SimpleHashMap(){
-        m_table = (Entry<K,V>[]) new Entry[100];
+        m_table = (Entry<K,V>[]) new Entry[2];
     }
     /** Constructs an empty hashmap with the specified initial capacity
      and the default load factor (0.75). */
@@ -57,6 +57,7 @@ public class SimpleHashMap<K,V>  implements Map<K,V> {
             Entry entry = aTable;
             while (entry != null) {
                 result.append(entry);
+                result.append(", ");
                 entry = entry.m_next;
             }
             result.append('\n');
@@ -81,7 +82,7 @@ public class SimpleHashMap<K,V>  implements Map<K,V> {
     @Override
     public V put(K key, V value) {
 
-        if (m_size * 3 / 4.0 >= m_table.length) rehash();
+        if (m_size >= m_table.length * 3 / 4.0) rehash();
 
         int index = index(key);
         Entry<K,V> oldEntry = find(index, key);
