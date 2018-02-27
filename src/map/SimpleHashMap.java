@@ -126,14 +126,14 @@ public class SimpleHashMap<K,V>  implements Map<K,V> {
 
     @Override
     public V remove(Object key) {
-        int index = index((K)key);
+        int index = index(key);
 
         Entry<K,V> cur = m_table[index];
 
         while (cur != null){
-            if (m_table[index].m_key.equals(key)){
-                V value = m_table[index].m_value;
-                m_table[index] = m_table[index].m_next;
+            if (cur.m_key.equals(key)){
+                V value = cur.m_value;
+                if(m_table[index] == cur) m_table[index] = cur.m_next;
                 m_size--;
                 return value;
             }
@@ -149,9 +149,9 @@ public class SimpleHashMap<K,V>  implements Map<K,V> {
     }
 
 
-    private int index(K key){
+    private int index(Object key){
         int hashCode = key.hashCode();
-        return (hashCode < 0 ? -hashCode : hashCode) % m_table.length;
+        return Math.abs(hashCode) % m_table.length;
     }
 
     private Entry<K,V> find(int index, K key){
